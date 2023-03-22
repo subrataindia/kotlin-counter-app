@@ -27,26 +27,30 @@ class MainActivity : AppCompatActivity() {
         // View Model
         counterViewModel = ViewModelProvider(this, counterViewModelFactory).get(CounterViewModel::class.java)
 
-        counterViewModel.counterLiveData.observe(this, Observer {
-            //findViewById<TextView>(R.id.counter).text = (it).toString()
-            activityMainBinding.counter.text = (it).toString()
-        })
+//        counterViewModel.counterLiveData.observe(this, Observer {
+//            //findViewById<TextView>(R.id.counter).text = (it).toString()
+//            activityMainBinding.counter.text = (it).toString()
+//        })
 
 
 //        findViewById<Button>(R.id.btnDecrease).setOnClickListener(){
 //            counterViewModel.decCounter()
 //        }
 
-        activityMainBinding.btnDecrease.setOnClickListener(){
-            counterViewModel.decCounter()
-        }
+//        activityMainBinding.btnDecrease.setOnClickListener(){
+//            counterViewModel.decCounter()
+//        }
 
 //        findViewById<Button>(R.id.btnIncrease).setOnClickListener(){
 //            counterViewModel.incCounter()
 //        }
 
-        activityMainBinding.btnIncrease.setOnClickListener(){
-            counterViewModel.incCounter()
-        }
+//        activityMainBinding.btnIncrease.setOnClickListener(){
+//            counterViewModel.incCounter()
+//        }
+
+        // Instead of all observers and listeners use below lines if you are using data variable in XML file
+        activityMainBinding.counterViewModel = counterViewModel
+        activityMainBinding.lifecycleOwner = this
     }
 }

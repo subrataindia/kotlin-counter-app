@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.livedataexample.databinding.ActivityMainBinding
+import kotlinx.coroutines.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -52,5 +53,29 @@ class MainActivity : AppCompatActivity() {
         // Instead of all observers and listeners use below lines if you are using data variable in XML file
         activityMainBinding.counterViewModel = counterViewModel
         activityMainBinding.lifecycleOwner = this
+
+        activityMainBinding.btnHeavyFun.setOnClickListener(){
+            //
+            CoroutineScope(Dispatchers.IO).launch{
+                heavyFunction()
+            }
+        }
+
+    }
+
+    private suspend fun heavyFunction(){
+        for(i in 1 .. 20){
+            delay(1000)
+            Log.d("HEAVY","Value of I = $i. Heavy Function in Thread ${Thread.currentThread().name}")
+            // If you will not use withContext Then it will through below error
+            // Only the original thread that created a view hierarchy can touch its views.
+            withContext(Dispatchers.Main) {
+                activityMainBinding.tvHeavyFun.setText("Value of I = $i. Heavy Function in Thread ${Thread.currentThread().name}")
+            }
+            // Now if you look at the logs:
+            // - loging the message shows that Heavy Function is running on DefaultDispatcher-worker-1 thread
+            // - But the text view message shows that Heavy Function is running on main thread
+            // It is because of withContext. During updation of text view it switches to main thread
+        }
     }
 }

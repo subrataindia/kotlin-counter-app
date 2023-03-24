@@ -56,7 +56,27 @@
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title" />
-
+        <TextView
+            android:id="@+id/tvHeavyFun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Heavy Function Text"
+            app:layout_constraintBottom_toTopOf="@+id/btnHeavyFun"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="30dp"
+            android:textSize="25sp"
+            />
+        <Button
+            android:id="@+id/btnHeavyFun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start Heavy Function"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="20dp"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
